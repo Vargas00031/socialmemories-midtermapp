@@ -57,7 +57,7 @@ class DownloadScreen extends StatelessWidget {
             
             // Download button
             if (!kIsWeb) ...[
-              const Text(
+              Text(
                 'Download the Android app below:',
                 style: TextStyle(
                   fontSize: 16,
@@ -99,13 +99,13 @@ class DownloadScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'For the best experience, download our mobile app from the Google Play Store.',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
                       ),
-                    textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton.icon(

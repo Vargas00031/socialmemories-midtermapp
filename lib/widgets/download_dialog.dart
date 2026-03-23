@@ -47,7 +47,7 @@ class _DownloadDialogState extends State<DownloadDialog> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    title ?? 'Download File',
+                    widget.title ?? 'Download File',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class _DownloadDialogState extends State<DownloadDialog> {
               LinearProgressIndicator(
                 value: _downloadProgress,
                 backgroundColor: Colors.grey[300],
-                valueColor: Theme.of(context).primaryColor,
+                valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
               ),
               const SizedBox(height: 8),
               Text(
@@ -151,8 +151,8 @@ class _DownloadDialogState extends State<DownloadDialog> {
     });
 
     final filePath = await DownloadService.downloadFile(
-      url: url,
-      fileName: fileName,
+      url: widget.url,
+      fileName: widget.fileName,
       onProgress: (progress) {
         if (mounted) {
           setState(() {

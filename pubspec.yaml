@@ -17,8 +17,8 @@ dependencies:
   firebase_storage: ^13.1.0
   
   # ✅ FIXED MAP STACK (compatible versions)
-  flutter_map: ^6.1.0
-  flutter_map_marker_cluster: ^1.0.2
+  flutter_map: ^8.2.2
+  flutter_map_marker_cluster: ^8.2.2
   latlong2: ^0.9.0
   
   # State Management

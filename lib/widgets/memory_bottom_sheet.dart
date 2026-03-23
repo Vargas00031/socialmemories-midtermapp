@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/post.dart';
-import '../services/download_service.dart';
+import '../widgets/download_dialog.dart';
 
 /// [CLASS] MemoryBottomSheet
 /// [PURPOSE] StatelessWidget for displaying memory details in bottom sheet
@@ -18,6 +18,19 @@ class MemoryBottomSheet extends StatelessWidget {
     super.key,
     required this.post,
   });
+
+  /// [FUNCTION] _shareMemory
+  /// [PARAMS] BuildContext context
+  /// [RETURNS] Future<void>
+  /// [PURPOSE] Share memory content using native sharing
+  Future<void> _shareMemory(BuildContext context) async {
+    final text = '''
+📍 ${post.title}
+${post.content}
+Shared from Social Memories 💚
+''';    
+    await Share.share(text, subject: post.title);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,35 +127,17 @@ class MemoryBottomSheet extends StatelessWidget {
                   
                   const SizedBox(height: 16),
                   
-                  // [UI] Action buttons
+                  // [UI] Share button
                   SizedBox(
                     width: double.infinity,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () => _shareMemory(),
-                            icon: const Icon(Icons.share),
-                            label: const Text('Share'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF66BB6A),
-                              foregroundColor: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () => _downloadImage(),
-                            icon: const Icon(Icons.download),
-                            label: const Text('Download'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              foregroundColor: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: ElevatedButton.icon(
+                      onPressed: () => _shareMemory(context),
+                      icon: const Icon(Icons.share),
+                      label: const Text('Share Memory'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF66BB6A),
+                        foregroundColor: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -151,80 +146,6 @@ class MemoryBottomSheet extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  /// [FUNCTION] _shareMemory
-  /// [PARAMS] None
-  /// [RETURNS] Future<void>
-  /// [PURPOSE] Share memory content using native sharing
-  Future<void> _shareMemory() async {
-    final text = '''
-📍 ${post.title}
-${post.content}
-Shared from Social Memories 💚
-''';    
-    await Share.share(text, subject: post.title);
-  }
-
-  /// [FUNCTION] _downloadImage
-  /// [PARAMS] None
-  /// [RETURNS] Future<void>
-  /// [PURPOSE] Download post image with progress dialog
-  Future<void> _downloadImage() async {
-    if (post.imageDataBase64 == null && post.imageUrl == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No image available to download'),
-          backgroundColor: Colors.orange,
-        ),
-      );
-      return;
-    }
-
-    // Generate filename from post title and timestamp
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final sanitizedName = post.title.replaceAll(RegExp(r'[^\w\s]'), '_').toLowerCase();
-    final fileName = '${sanitizedName}_$timestamp.jpg';
-
-    String downloadUrl = '';
-    String? imageData;
-
-    if (post.imageDataBase64 != null && post.imageDataBase64!.isNotEmpty) {
-      // For base64 images, we need to convert back to bytes
-      try {
-        final bytes = base64Decode(post.imageDataBase64!);
-        final tempDir = Directory.systemTemp;
-        final tempFile = File('${tempDir.path}/$fileName');
-        await tempFile.writeAsBytes(bytes);
-        downloadUrl = tempFile.path;
-        imageData = post.imageDataBase64!;
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to prepare image: $e')),
-        );
-        return;
-      }
-    } else if (post.imageUrl != null && post.imageUrl!.isNotEmpty) {
-      downloadUrl = post.imageUrl!;
-    }
-
-    if (downloadUrl.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No image available to download'),
-          backgroundColor: Colors.orange,
-        ),
-      );
-      return;
-    }
-
-    // Show download dialog
-    await DownloadDialog.show(
-      context: context,
-      url: downloadUrl,
-      fileName: fileName,
-      title: 'Download Image',
     );
   }
 }

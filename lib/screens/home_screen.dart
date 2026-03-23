@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'map_screen.dart';
 import 'simple_login_screen.dart';
+import 'download_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -52,12 +53,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: hasValidNetworkImage
-                      ? NetworkImage(profileImage)
-                      : const AssetImage('assets/images/app_logo.png'),
-                  child: !hasValidNetworkImage
-                      ? const Icon(Icons.person, color: Colors.white)
-                      : null,
+                  backgroundImage: const AssetImage('assets/images/app_logo.png'),
+                  child: const Icon(Icons.person, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
                 Text(

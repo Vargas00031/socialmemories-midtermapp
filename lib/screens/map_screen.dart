@@ -1,3 +1,4 @@
+import 'dart:convert';                                  // [IMPORT] Base64 decoding
 import 'dart:io';                                      // [IMPORT] File handling for local profile images
 import 'package:flutter/foundation.dart' show kIsWeb; // [IMPORT] Web-safe profile image
 import 'package:flutter/material.dart';                // [IMPORT] Flutter UI framework
