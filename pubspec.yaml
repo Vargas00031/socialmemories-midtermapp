@@ -10,16 +10,16 @@ dependencies:
   flutter:
     sdk: flutter
   
-  # Firebase
+  # Firebase (latest stable & compatible)
   firebase_core: ^4.5.0
   firebase_auth: ^6.2.0
   cloud_firestore: ^6.1.3
   firebase_storage: ^13.1.0
   
-  # Maps (OpenStreetMap)
-  flutter_map: ^8.2.2
-  flutter_map_marker_cluster: ^8.2.2
-  latlong2: ^0.9.1
+  # ✅ FIXED MAP STACK (compatible versions)
+  flutter_map: ^6.1.0
+  flutter_map_marker_cluster: ^1.0.2
+  latlong2: ^0.9.0
   
   # State Management
   provider: ^6.1.1
@@ -45,7 +45,6 @@ dependencies:
   
   # UI
   cupertino_icons: ^1.0.6
-  flutter_staggered_animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:
