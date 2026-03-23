@@ -1,0 +1,79 @@
+name: Build and Release APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.6' # Use stable version that works
+        channel: 'stable'
+
+    - name: Get Flutter dependencies
+      run: flutter pub get
+
+    - name: Build APK
+      run: |
+        echo "Building APK for Social Memories App..."
+        flutter build apk --release --no-shrink
+        
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: social-memories-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
+
+    - name: Create Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          build/app/outputs/flutter-apk/app-release.apk
+        name: Social Memories App v${{ github.run_number }}
+        body: |
+          ## 📍 Social Memories App
+          
+          A map-based social journaling application where users can share personal memories by placing pins on a map.
+          
+          ### ✨ Features:
+          - 📍 Map-based memory sharing
+          - 📸 Image upload and sharing
+          - 👥 Social features (follow, like, comment)
+          - 💾 Base64 image storage (no Firebase Storage costs)
+          - 📱 Cross-platform support (Android, iOS, Web)
+          - ⬇️ Download functionality for images
+          - 🎯 Accurate location detection (Caloocan priority)
+          
+          ### 🔧 Technical Details:
+          - Flutter 3.19.6
+          - Firebase Firestore for data storage
+          - OpenStreetMap for mapping
+          - Provider state management
+          
+          ### 📥 Installation:
+          Download the APK from the assets section below.
+          
+          ---
+          Built with ❤️ using GitHub Actions
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
