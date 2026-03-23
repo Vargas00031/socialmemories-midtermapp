@@ -1,0 +1,60 @@
+name: social_memories_app
+description: A map-based social journaling application where users can share personal memories by placing pins on a map.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Firebase
+  firebase_core: ^4.5.0
+  firebase_auth: ^6.2.0
+  cloud_firestore: ^6.1.3
+  firebase_storage: ^13.1.0
+  
+  # Maps (OpenStreetMap)
+  flutter_map: ^8.2.2
+  flutter_map_marker_cluster: ^8.2.2
+  latlong2: ^0.9.1
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # Location
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
+  
+  # Image
+  image_picker: ^1.1.2
+  cached_network_image: ^3.3.1
+  
+  # Local Storage
+  shared_preferences: ^2.2.3
+  
+  # Utilities
+  intl: ^0.20.2
+  uuid: ^4.4.0
+  http: ^1.2.1
+  url_launcher: ^6.3.0
+  share_plus: ^12.0.1
+  path_provider: ^2.1.1
+  
+  # UI
+  cupertino_icons: ^1.0.6
+  flutter_staggered_animations: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/

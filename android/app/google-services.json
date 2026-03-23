@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "995314110713",
+    "project_id": "midtermsocialmemories-63575",
+    "storage_bucket": "midtermsocialmemories-63575.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995314110713:android:1c1f49b070124d7b7b9228",
+        "android_client_info": {
+          "package_name": "com.example.social_memories_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNrj72ozT-FdGfg1txkz3GVJ_6TI6s5a4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995314110713:android:3dd90a63791000987b9228",
+        "android_client_info": {
+          "package_name": "com.midtermsocialmemories.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNrj72ozT-FdGfg1txkz3GVJ_6TI6s5a4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

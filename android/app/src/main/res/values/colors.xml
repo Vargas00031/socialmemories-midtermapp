@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Social Memories Brand Colors -->
+    <color name="md_theme_light_primary">#66BB6A</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_secondary">#42A5F5</color>
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_background">#F5F5F5</color>
+    <color name="md_theme_light_error">#F44336</color>
+    <color name="md_theme_light_onSurface">#2E7D32</color>
+    <color name="md_theme_light_outline">#66BB6A</color>
+</resources>
